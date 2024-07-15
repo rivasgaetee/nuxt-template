@@ -48,34 +48,8 @@ const authThemeMask = useGenerateImageVariant(authV2MaskLight, authV2MaskDark)
     class="auth-wrapper bg-surface"
   >
     <VCol
-      md="8"
-      class="d-none d-md-flex"
-    >
-      <div class="position-relative bg-background w-100 me-0">
-        <div
-          class="d-flex align-center justify-center w-100 h-100"
-          style="padding-inline: 6.25rem;"
-        >
-          <VImg
-            max-width="613"
-            :src="authThemeImg"
-            class="auth-illustration mt-16 mb-2"
-          />
-        </div>
-
-        <img
-          class="auth-footer-mask"
-          :src="authThemeMask"
-          alt="auth-footer-mask"
-          height="280"
-          width="100"
-        >
-      </div>
-    </VCol>
-
-    <VCol
       cols="12"
-      md="4"
+      md="12"
       class="auth-card-v2 d-flex align-center justify-center"
     >
       <VCard
@@ -85,24 +59,11 @@ const authThemeMask = useGenerateImageVariant(authV2MaskLight, authV2MaskDark)
       >
         <VCardText>
           <h4 class="text-h4 mb-1">
-            Welcome to <span class="text-capitalize"> {{ themeConfig.app.title }} </span>! 👋🏻
+            Bienvenido a <span class="text-capitalize"> {{ themeConfig.app.title }} </span>! 👋🏻
           </h4>
           <p class="mb-0">
-            Please sign-in to your account and start the adventure
+            Puedes registrarte o acceder por auth0
           </p>
-        </VCardText>
-        <VCardText>
-          <VAlert
-            color="primary"
-            variant="tonal"
-          >
-            <p class="text-sm mb-2">
-              Admin Email: <strong>admin@demo.com</strong> / Pass: <strong>admin</strong>
-            </p>
-            <p class="text-sm mb-0">
-              Client Email: <strong>client@demo.com</strong> / Pass: <strong>client</strong>
-            </p>
-          </VAlert>
         </VCardText>
         <VCardText>
           <VForm @submit.prevent="() => { }">
@@ -114,7 +75,7 @@ const authThemeMask = useGenerateImageVariant(authV2MaskLight, authV2MaskDark)
                   autofocus
                   label="Email"
                   type="email"
-                  placeholder="johndoe@email.com"
+                  placeholder="todolist@email.com"
                 />
               </VCol>
 
@@ -129,47 +90,23 @@ const authThemeMask = useGenerateImageVariant(authV2MaskLight, authV2MaskDark)
                   @click:append-inner="isPasswordVisible = !isPasswordVisible"
                 />
 
-                <div class="d-flex align-center flex-wrap justify-space-between mt-2 mb-4">
-                  <VCheckbox
-                    v-model="form.remember"
-                    label="Remember me"
-                  />
-                  <a
-                    class="text-primary ms-2 mb-1"
-                    href="#"
+                <div class="d-flex align-center flex-wrap justify-space-between mt-8 mb-4">
+                  <VBtn
+                    block
+                    type="submit"
                   >
-                    Forgot Password?
-                  </a>
+                    Registrarse
+                  </VBtn>
                 </div>
-
-                <VBtn
-                  block
-                  type="submit"
-                >
-                  Login
-                </VBtn>
               </VCol>
 
               <!-- create account -->
               <VCol
                 cols="12"
-                class="text-center"
-              >
-                <span>New on our platform?</span>
-
-                <a
-                  class="text-primary ms-2"
-                  href="#"
-                >
-                  Create an account
-                </a>
-              </VCol>
-              <VCol
-                cols="12"
                 class="d-flex align-center"
               >
                 <VDivider />
-                <span class="mx-4">or</span>
+                <span class="mx-4">o</span>
                 <VDivider />
               </VCol>
 
@@ -178,7 +115,7 @@ const authThemeMask = useGenerateImageVariant(authV2MaskLight, authV2MaskDark)
                 cols="12"
                 class="text-center"
               >
-                <AuthProvider />
+                <LoginButton />
               </VCol>
             </VRow>
           </VForm>
