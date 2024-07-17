@@ -1,5 +1,15 @@
 <script setup lang="ts">
+import { onMounted } from 'vue'
 import avatar1 from '@images/avatars/avatar-1.png'
+import { useAuthStore } from '@/stores/auth'
+
+const authStore = useAuthStore()
+
+const user = authStore.user
+
+onMounted(() => {
+  authStore.refreshUser()
+})
 </script>
 
 <template>
@@ -16,7 +26,7 @@ import avatar1 from '@images/avatars/avatar-1.png'
       color="primary"
       variant="tonal"
     >
-      <VImg :src="avatar1" />
+      <VImg :src="user?.picture ? user?.picture : avatar1" />
 
       <!-- SECTION Menu -->
       <VMenu
@@ -41,14 +51,14 @@ import avatar1 from '@images/avatars/avatar-1.png'
                     color="primary"
                     variant="tonal"
                   >
-                    <VImg :src="avatar1" />
+                    <VImg :src="user?.picture" />
                   </VAvatar>
                 </VBadge>
               </VListItemAction>
             </template>
 
             <VListItemTitle class="font-weight-semibold">
-              John Doe
+              {{ user?.name }}
             </VListItemTitle>
             <VListItemSubtitle>Admin</VListItemSubtitle>
           </VListItem>
@@ -111,7 +121,7 @@ import avatar1 from '@images/avatars/avatar-1.png'
           <VDivider class="my-2" />
 
           <!-- 👉 Logout -->
-          <VListItem to="/login">
+          <VListItem link>
             <template #prepend>
               <VIcon
                 class="me-2"
@@ -120,7 +130,7 @@ import avatar1 from '@images/avatars/avatar-1.png'
               />
             </template>
 
-            <VListItemTitle>Logout</VListItemTitle>
+            <LogoutButton />
           </VListItem>
         </VList>
       </VMenu>

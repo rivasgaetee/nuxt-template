@@ -21,6 +21,16 @@ export default defineNuxtConfig({
     enabled: true,
   },
 
+  runtimeConfig: {
+    public: {
+      auth0Domain: process.env.AUTH0_DOMAIN,
+      auth0ClientId: process.env.AUTH0_CLIENT_ID,
+      auth0CallbackUrl: process.env.AUTH0_CALLBACK_URL,
+      auth0Audience: process.env.AUTH0_AUDIENCE,
+      apiBaseUrl: process.env.API_BASE_URL,
+    },
+  },
+
   css: [
     '@core/scss/template/index.scss',
     '@styles/styles.scss',
