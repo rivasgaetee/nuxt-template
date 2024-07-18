@@ -24,6 +24,20 @@ export const useAuthStore = defineStore('auth', {
       if (token)
         this.token = token
     },
+    getUser(): UserResponse | null {
+      const user: string | null = localStorage.getItem('user')
+      if (user)
+        this.user = JSON.parse(user)
+
+      return this.user
+    },
+    getToken(): string | null {
+      const token: string | null = localStorage.getItem('token')
+      if (token)
+        this.token = token
+
+      return this.token
+    },
     clearAuth(): void {
       this.user = null
       this.token = null
