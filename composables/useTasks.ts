@@ -26,6 +26,6 @@ export const useTasks = () => {
     tasks,
     loading,
     error,
-    fetchTasks
+    fetchTasks,
   }
 }

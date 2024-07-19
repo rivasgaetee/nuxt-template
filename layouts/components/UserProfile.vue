@@ -2,13 +2,13 @@
 import { onMounted } from 'vue'
 import avatar1 from '@images/avatars/avatar-1.png'
 import { useAuthStore } from '@/stores/auth'
+import type { UserResponse } from '@/interfaces/responses/User.response';
 
 const authStore = useAuthStore()
-
-const user = authStore.user
+let user: UserResponse | null
 
 onMounted(() => {
-  authStore.refreshUser()
+  user = authStore.getUser()
 })
 </script>
 

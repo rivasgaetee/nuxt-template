@@ -1,5 +1,11 @@
 <script setup lang="ts">
-import TaskTable from '@/components/tables/TaskTable.vue';
+import TaskTable from '@/components/tables/TaskTable.vue'
+
+definePageMeta(
+  {
+    middleware: 'auth',
+  },
+)
 </script>
 
 <template>
