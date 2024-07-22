@@ -1,32 +1,63 @@
 <script setup lang="ts">
 import { onMounted } from 'vue'
 import { useTasks } from '~/composables/useTasks'
-import { useAuthStore } from '~/stores/auth'
+import TaskCard from '~/components/cards/TaskCard.vue'
 
 const { tasks, loading, error, fetchTasks } = useTasks()
-const authStore = useAuthStore()
+
+const tasksByStatus = (status: number) => {
+  return tasks.value.filter(task => task.status.id === status)
+}
 
 onMounted(() => {
-  if (authStore.getToken())
-    fetchTasks()
+  fetchTasks()
+  console.log(tasks.value)
 })
 </script>
 
 <template>
   <VApp>
     <VMain>
-      <div class="container">
-        <VCard>
-          <VCardTitle>Task List</VCardTitle>
-          <VCardText>
-            <div v-if="loading">Loading tasks...</div>
-            <div v-if="error">{{ error }}</div>
-            <ul v-if="tasks.length">
-              <li v-for="task in tasks" :key="task.id">{{ task.title }}</li>
-            </ul>
-          </VCardText>
-        </VCard>
-      </div>
+      <VContainer>
+        <VRow>
+          <VCol cols="12" sm="4">
+            <h2>Nuevas</h2>
+            <VRow>
+              <VCol
+                v-for="task in tasksByStatus(1)"
+                :key="task.id"
+                cols="12"
+              >
+                <TaskCard :task="task" />
+              </VCol>
+            </VRow>
+          </VCol>
+          <VCol cols="12" sm="4">
+            <h2>Iniciadas</h2>
+            <VRow>
+              <VCol
+                v-for="task in tasksByStatus(2)"
+                :key="task.id"
+                cols="12"
+              >
+                <TaskCard :task="task" />
+              </VCol>
+            </VRow>
+          </VCol>
+          <VCol cols="12" sm="4">
+            <h2>Completadas</h2>
+            <VRow>
+              <VCol
+                v-for="task in tasksByStatus(3)"
+                :key="task.id"
+                cols="12"
+              >
+                <TaskCard :task="task" />
+              </VCol>
+            </VRow>
+          </VCol>
+        </VRow>
+      </VContainer>
     </VMain>
   </VApp>
 </template>
