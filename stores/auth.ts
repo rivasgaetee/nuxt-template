@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import type { UserResponse } from '@/interfaces/responses/User.response'
+import type { UserResponse } from '@/interfaces/responses/UserResponse'
 
 export const useAuthStore = defineStore('auth', {
   state: () => ({

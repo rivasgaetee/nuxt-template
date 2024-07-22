@@ -22,6 +22,7 @@ onMounted(() => {
         <VRow>
           <VCol cols="12" sm="4">
             <h2>Nuevas</h2>
+            <AddTaskForm />
             <VRow>
               <VCol
                 v-for="task in tasksByStatus(1)"

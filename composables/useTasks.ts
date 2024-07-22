@@ -1,6 +1,6 @@
 import { ref } from 'vue'
 import { useNuxtApp } from '#app'
-import type { TaskResponse } from '@/interfaces/responses/Task.response';
+import type { TaskResponse } from '@/interfaces/responses/TaskResponse';
 
 export const useTasks = () => {
   const tasks = ref<TaskResponse[]>([])

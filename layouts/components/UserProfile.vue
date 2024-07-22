@@ -2,13 +2,14 @@
 import { onMounted } from 'vue'
 import avatar1 from '@images/avatars/avatar-1.png'
 import { useAuthStore } from '@/stores/auth'
-import type { UserResponse } from '@/interfaces/responses/User.response';
+import type { UserResponse } from '@/interfaces/responses/UserResponse';
 
 const authStore = useAuthStore()
 let user: UserResponse | null
 
 onMounted(() => {
   user = authStore.getUser()
+  console.log(user)
 })
 </script>
 
