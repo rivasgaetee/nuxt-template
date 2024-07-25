@@ -5,11 +5,10 @@ import { useTasks } from '~/composables/useTasks'
 const { fetchTasks, tasksByStatus, updateTaskStatus } = useTasks()
 
 const onTaskAdded = () => {
-  console.log('Task added')
+  console.log('Agregar toast o alerta')
 }
 
 const updateStatus = async (taskId: number, status: number) => {
-  console.log('actualizando', taskId, status)
   await updateTaskStatus(taskId, status)
 }
 

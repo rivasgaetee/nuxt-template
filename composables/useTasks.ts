@@ -1,4 +1,3 @@
-import { onMounted, ref } from 'vue'
 import { useTasksStore } from '@/stores/task'
 import type { TaskPayload } from '@/interfaces/payload/TaskPayload'
 import type { TaskResponse } from '@/interfaces/responses/TaskResponse'
@@ -48,10 +47,6 @@ export const useTasks = () => {
   const tasksByStatus = (status: number): TaskResponse[] => {
     return tasksStore.tasks.filter(task => task.status.id === status)
   }
-
-  onMounted(() => {
-    fetchTasks()
-  })
 
   return {
     tasks: tasksStore.tasks,
