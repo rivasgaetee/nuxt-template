@@ -22,9 +22,10 @@ export const useTasksStore = defineStore('tasks', {
     async addTask(payload: TaskPayload) {
       try {
         const { $apiClient } = useNuxtApp()
-        const response = await $apiClient.post<TaskPayload, TaskResponse>('/tasks', payload)
+        const response = await $apiClient.post<TaskResponse>('/tasks/', payload)
 
-        this.tasks.push(response)
+        console.log(response.data)
+        this.tasks.push(response.data)
       }
       catch (error) {
         console.error('addTask error:', error)

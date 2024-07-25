@@ -3,6 +3,8 @@ import { ref } from 'vue'
 import { useTasks } from '~/composables/useTasks'
 import type { TaskPayload } from '@/interfaces/payload/TaskPayload'
 
+const emit = defineEmits(['task-added'])
+
 const isDialogVisible = ref(false)
 const { addTask } = useTasks()
 
@@ -25,8 +27,8 @@ const handleSubmit = () => {
   }
 
   addTask(newTask)
-
   resetForm()
+  emit('task-added')
 }
 </script>
 
@@ -40,7 +42,7 @@ const handleSubmit = () => {
       <VBtn
         v-bind="props"
         size="x-large"
-        class="w-100"
+        class="w-100 mb-6"
       >
         <VIcon
           icon="tabler-plus"

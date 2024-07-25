@@ -4,6 +4,10 @@ import { useTasks } from '~/composables/useTasks'
 
 const { fetchTasks, tasksByStatus } = useTasks()
 
+const onTaskAdded = () => {
+  console.log('Task added')
+}
+
 onMounted(() => {
   fetchTasks()
 })
@@ -16,7 +20,7 @@ onMounted(() => {
         <VRow>
           <VCol cols="12" sm="4">
             <h2>Nuevas</h2>
-            <AddTaskForm />
+            <AddTaskForm @task-added="onTaskAdded" />
             <VRow>
               <VCol
                 v-for="task in tasksByStatus(1)"
