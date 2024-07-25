@@ -1,13 +1,13 @@
-import { ApiServiceType } from '~/app/utils/api'
+import { AxiosInstance } from 'axios'
 
 declare module '#app' {
   interface NuxtApp {
-    $apiService: ReturnType<typeof ApiServiceType>
+    $apiClient: AxiosInstance
   }
 }
 
-declare module 'vue' {
+declare module '@vue/runtime-core' {
   interface ComponentCustomProperties {
-    $apiService: ReturnType<typeof ApiServiceType>
+    $apiClient: AxiosInstance
   }
 }

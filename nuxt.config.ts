@@ -21,6 +21,8 @@ export default defineNuxtConfig({
     enabled: true,
   },
 
+  plugins: ['@/plugins/api.ts', '@/plugins/vuetify/index.ts', '@/plugins/iconify/index.ts'],
+
   runtimeConfig: {
     public: {
       auth0Domain: process.env.AUTH0_DOMAIN,
@@ -49,8 +51,6 @@ export default defineNuxtConfig({
       pathPrefix: false,
     }],
   },
-
-  plugins: ['@/plugins/vuetify/index.ts', '@/plugins/iconify/index.ts', '@/plugins/api.ts'],
 
   imports: {
     dirs: ['./@core/utils', './@core/composable/', './plugins/*/composables/*'],

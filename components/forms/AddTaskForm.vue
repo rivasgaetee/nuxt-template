@@ -1,8 +1,33 @@
 <script lang="ts" setup>
+import { ref } from 'vue'
+import { useTasks } from '~/composables/useTasks'
+import type { TaskPayload } from '@/interfaces/payload/TaskPayload'
+
 const isDialogVisible = ref(false)
+const { addTask } = useTasks()
+
 const title = ref('')
 const description = ref('')
 const status = ref(1)
+
+const resetForm = () => {
+  title.value = ''
+  description.value = ''
+  status.value = 1
+  isDialogVisible.value = false
+}
+
+const handleSubmit = () => {
+  const newTask: TaskPayload = {
+    title: title.value,
+    description: description.value,
+    status: status.value,
+  }
+
+  addTask(newTask)
+
+  resetForm()
+}
 </script>
 
 <template>
@@ -58,7 +83,7 @@ const status = ref(1)
         >
           Cerrar
         </VBtn>
-        <VBtn @click="isDialogVisible = false">
+        <VBtn @click="handleSubmit">
           Guardar
         </VBtn>
       </VCardText>

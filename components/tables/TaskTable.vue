@@ -1,17 +1,11 @@
 <script setup lang="ts">
 import { onMounted } from 'vue'
 import { useTasks } from '~/composables/useTasks'
-import TaskCard from '~/components/cards/TaskCard.vue'
 
-const { tasks, loading, error, fetchTasks } = useTasks()
-
-const tasksByStatus = (status: number) => {
-  return tasks.value.filter(task => task.status.id === status)
-}
+const { fetchTasks, tasksByStatus } = useTasks()
 
 onMounted(() => {
   fetchTasks()
-  console.log(tasks.value)
 })
 </script>
 

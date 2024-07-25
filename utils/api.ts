@@ -1,42 +1,40 @@
-import { useAuthStore } from '~/stores/auth'
+import { inject } from 'vue'
+import type { AxiosInstance } from 'axios'
 
-export const ApiServiceType = (baseUrl: string) => {
-  const getHeaders = () => {
-    const authStore = useAuthStore()
+class ApiService {
+  private client: AxiosInstance
 
-    return {
-      'Authorization': `Bearer ${authStore.token}`,
-      'Content-Type': 'application/json',
-    }
+  constructor(client: AxiosInstance) {
+    this.client = client
+    console.log('ApiService initialized with client:', client)
   }
 
-  return {
-    get: async (endpoint: string) => {
-      const response = await fetch(`${baseUrl}${endpoint}`, {
-        method: 'GET',
-        headers: getHeaders(),
-      })
+  async get<T>(url: string): Promise<T> {
+    console.log('GET request to', url)
 
-      if (!response.ok)
-        throw new Error('Failed to fetch')
+    const response = await this.client.get<T>(url)
 
-      return response.json()
-    },
-    post: async (endpoint: string, data: any) => {
-      const response = await fetch(`${baseUrl}${endpoint}`, {
-        method: 'POST',
-        headers: getHeaders(),
-        body: JSON.stringify(data),
-      })
-
-      if (!response.ok)
-        throw new Error('Failed to post')
-
-      return response.json()
-    },
-
-    // TODO: agregar más métodos como PUT, DELETE, etc.
+    return response.data
   }
+
+  async post<T, P>(url: string, payload: P): Promise<T> {
+    console.log('POST request to', url, 'with payload:', payload)
+
+    const response = await this.client.post<T>(url, payload)
+
+    return response.data
+  }
+
+  // TODO: Add PUT and DELETE methods
 }
 
-export default ApiServiceType
+export const useApiService = () => {
+  const apiClient = inject<AxiosInstance>('apiClient')
+  if (!apiClient) {
+    console.error('API client injection failed')
+    throw new Error('API client is not provided')
+  }
+  console.log('API client injected:', apiClient)
+
+  return new ApiService(apiClient)
+}
