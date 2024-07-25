@@ -36,6 +36,15 @@ export const useTasks = () => {
     }
   }
 
+  const updateTaskStatus = async (taskId: number, status: number) => {
+    try {
+      await tasksStore.updateTaskStatus(taskId, status)
+    }
+    catch (err) {
+      error.value = (err as Error).message
+    }
+  }
+
   const tasksByStatus = (status: number): TaskResponse[] => {
     return tasksStore.tasks.filter(task => task.status.id === status)
   }
@@ -51,5 +60,6 @@ export const useTasks = () => {
     fetchTasks,
     addTask,
     tasksByStatus,
+    updateTaskStatus,
   }
 }

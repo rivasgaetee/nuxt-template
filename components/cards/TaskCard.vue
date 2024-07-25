@@ -5,7 +5,10 @@ const props = defineProps<{
   task: TaskResponse
 }>()
 
+const emit = defineEmits(['updateStatus'])
+
 const handleChangeStatus = (status: number) => {
+  emit('updateStatus', props.task.id, status)
 }
 </script>
 

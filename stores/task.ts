@@ -31,5 +31,18 @@ export const useTasksStore = defineStore('tasks', {
         console.error('addTask error:', error)
       }
     },
+    async updateTaskStatus(taskId: number, status: number) {
+      try {
+        const { $apiClient } = useNuxtApp()
+        const response = await $apiClient.patch<TaskResponse>(`/tasks/${taskId}/`, { status })
+        const index = this.tasks.findIndex(task => task.id === taskId)
+
+        if (index !== -1)
+          this.tasks[index] = response.data
+      }
+      catch (error) {
+        console.error('updateTaskStatus error:', error)
+      }
+    },
   },
 })

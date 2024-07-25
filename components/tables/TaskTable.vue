@@ -2,10 +2,15 @@
 import { onMounted } from 'vue'
 import { useTasks } from '~/composables/useTasks'
 
-const { fetchTasks, tasksByStatus } = useTasks()
+const { fetchTasks, tasksByStatus, updateTaskStatus } = useTasks()
 
 const onTaskAdded = () => {
   console.log('Task added')
+}
+
+const updateStatus = async (taskId: number, status: number) => {
+  console.log('actualizando', taskId, status)
+  await updateTaskStatus(taskId, status)
 }
 
 onMounted(() => {
@@ -27,7 +32,10 @@ onMounted(() => {
                 :key="task.id"
                 cols="12"
               >
-                <TaskCard :task="task" />
+                <TaskCard
+                  :task="task"
+                  @update-status="updateStatus"
+                />
               </VCol>
             </VRow>
           </VCol>
@@ -39,7 +47,10 @@ onMounted(() => {
                 :key="task.id"
                 cols="12"
               >
-                <TaskCard :task="task" />
+                <TaskCard
+                  :task="task"
+                  @update-status="updateStatus"
+                />
               </VCol>
             </VRow>
           </VCol>
